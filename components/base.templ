@@ -1,0 +1,42 @@
+package components
+
+templ Base(title string) {
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10/dist/ext/streaming.js"></script>
+    <title>{title}</title>
+</head>
+
+<body>
+    <h1>ROMULUS!!</h1>
+    {children...}
+    <script>
+        const ws = new WebSocket("ws://localhost:8080/ws")
+        let currentDiv
+
+
+
+        function send() {
+            const query = document.getElementById("query")
+            currentDiv = document.createElement("div")
+            document.getElementById("response").appendChild(currentDiv)
+            ws.send(query.value)
+            query.value = ""
+        }
+
+        ws.onmessage = (event) => {
+            currentDiv.textContent += event.data
+        }
+    </script>
+</body>
+
+
+
+</html>
+
+}

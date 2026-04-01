@@ -1,0 +1,21 @@
+package components
+
+templ Home() {
+@Base("ROMULUS"){
+<div>
+
+    <form hx-post="/upload" hx-target="#result" hx-swap="innerHTML" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <textarea id="query" placeholder="Enter your chat!!!"></textarea>
+    <button onclick="send()">Send</button>
+
+    <div id="result"></div>
+
+    <div id="response"></div>
+</div>
+}
+
+}
